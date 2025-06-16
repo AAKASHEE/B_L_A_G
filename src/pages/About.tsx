@@ -298,7 +298,7 @@ const About = () => {
                   Get in Touch
                 </a>
                 <a
-                  href="https://drive.google.com/file/d/1bTrb2CPRtiDGWR4ZAny3cHDghqIRXlph/view"
+                  href="src/public/img/IMG_2446.jpg"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="inline-flex items-center px-6 py-3 border-2 border-white text-white font-semibold rounded-xl hover:bg-white hover:text-gray-900 transition-all duration-200"
