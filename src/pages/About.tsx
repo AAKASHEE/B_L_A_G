@@ -321,7 +321,7 @@ const About = () => {
               <div className="w-80 h-80 mx-auto animate-float">
                 <div className="w-full h-full bg-gradient-to-br from-white/20 to-white/10 rounded-2xl shadow-2xl backdrop-blur-sm border border-white/20 overflow-hidden">
                   <img 
-                    src="/img/IMG_2446.jpg" 
+                    src="src/public/img/IMG_2446.jpg" 
                     alt="Aakashe Profile" 
                     className="w-full h-full object-cover profile-image"
                     onError={(e) => {
