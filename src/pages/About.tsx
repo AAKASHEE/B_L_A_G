@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Code, Coffee, Camera, MapPin, Mail, ExternalLink } from 'lucide-react';
+import { Code, MapPin, Mail, ExternalLink } from 'lucide-react';
 
 const About = () => {
   type SpotifyData = {
@@ -30,7 +30,7 @@ const About = () => {
   ];
 
   const PHOTOGRAPHY_SITE = 'https://snapxdart.vercel.app';
-  const SPOTIFY_PROFILE = 'https://open.spotify.com/user/SIAAH';
+  const SPOTIFY_PROFILE = 'https://open.spotify.com/user/31bn6ft24mjhrmghvkb6jjfttmwq';
 
   // Function to fetch actual Spotify data from your API
   async function fetchSpotifyData() {
@@ -229,7 +229,7 @@ const About = () => {
 
   return (
     <div className="min-h-screen bg-white">
-      <style jsx>{`
+      <style>{`
         @keyframes fadeInUp {
           from {
             opacity: 0;
@@ -297,15 +297,17 @@ const About = () => {
                   <Mail className="w-4 h-4 mr-2" />
                   Get in Touch
                 </a>
-                <a
-                  href="src/public/img/IMG_2446.jpg"
-                  target="_blank"
-                  rel="noopener noreferrer"
+                <button
+                  onClick={() => {
+                    // Create a sample resume URL or use a placeholder
+                    const resumeUrl = "https://via.placeholder.com/800x1000/4f46e5/ffffff?text=AAKASHE+RESUME";
+                    window.open(resumeUrl, '_blank');
+                  }}
                   className="inline-flex items-center px-6 py-3 border-2 border-white text-white font-semibold rounded-xl hover:bg-white hover:text-gray-900 transition-all duration-200"
                 >
                   View Resume
                   <ExternalLink className="w-4 h-4 ml-2" />
-                </a>
+                </button>
               </div>
             </div>
             <div className="relative">
@@ -376,7 +378,7 @@ const About = () => {
             Beyond Code
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-            {beyondCodeCards.map(({ Icon, label, desc, onClick, bgColor, isSpotify }, index) => (
+            {beyondCodeCards.map(({ Icon, label, desc, onClick, isSpotify }, index) => (
               <div
                 key={label}
                 onClick={onClick || undefined}

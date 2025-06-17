@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { Code, Coffee, Camera } from 'lucide-react';
 
-const PHOTOGRAPHY_SITE = 'https://your-photography-website.com';
-const SPOTIFY_PROFILE = 'https://open.spotify.com/user/your-spotify-username';
+const PHOTOGRAPHY_SITE = 'https://snapXdart.vercel.app';
+const SPOTIFY_PROFILE = 'https://open.spotify.com/user/31bn6ft24mjhrmghvkb6jjfttmwq';
 
 type SpotifyTrack = {
   name: string;
