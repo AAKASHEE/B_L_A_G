@@ -270,6 +270,14 @@ const About = () => {
         .icon-3d:hover {
           transform: rotateY(15deg) rotateX(15deg) scale(1.1);
         }
+
+        .profile-image {
+          transition: all 0.3s ease;
+        }
+
+        .profile-image:hover {
+          transform: scale(1.05);
+        }
       `}</style>
 
       {/* Hero Section */}
@@ -299,8 +307,7 @@ const About = () => {
                 </a>
                 <button
                   onClick={() => {
-                    // Create a sample resume URL or use a placeholder
-                    const resumeUrl = "https://via.placeholder.com/800x1000/4f46e5/ffffff?text=AAKASHE+RESUME";
+                    const resumeUrl = "https://drive.google.com/file/d/1bTrb2CPRtiDGWR4ZAny3cHDghqIRXlph/view";
                     window.open(resumeUrl, '_blank');
                   }}
                   className="inline-flex items-center px-6 py-3 border-2 border-white text-white font-semibold rounded-xl hover:bg-white hover:text-gray-900 transition-all duration-200"
@@ -312,8 +319,20 @@ const About = () => {
             </div>
             <div className="relative">
               <div className="w-80 h-80 mx-auto animate-float">
-                <div className="w-full h-full bg-gradient-to-br from-white/20 to-white/10 rounded-2xl shadow-2xl backdrop-blur-sm border border-white/20 flex items-center justify-center">
-                  <div className="text-6xl">👨‍💻</div>
+                <div className="w-full h-full bg-gradient-to-br from-white/20 to-white/10 rounded-2xl shadow-2xl backdrop-blur-sm border border-white/20 overflow-hidden">
+                  <img 
+                    src="src/public/img/IMG_2446.jpg" 
+                    alt="Aakashe Profile" 
+                    className="w-full h-full object-cover profile-image"
+                    onError={(e) => {
+                      const target = e.target as HTMLImageElement;
+                      target.style.display = 'none';
+                      const parent = target.parentElement;
+                      if (parent) {
+                        parent.innerHTML = '<div class="w-full h-full flex items-center justify-center text-6xl">👨‍💻</div>';
+                      }
+                    }}
+                  />
                 </div>
                 <div className="absolute -bottom-6 -right-6 w-24 h-24 bg-lime-400 rounded-2xl flex items-center justify-center shadow-xl">
                   <Code className="w-12 h-12 text-gray-900" />
