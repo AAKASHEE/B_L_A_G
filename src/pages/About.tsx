@@ -320,8 +320,8 @@ const About = () => {
             <div className="relative">
               <div className="w-80 h-80 mx-auto animate-float">
                 <div className="w-full h-full bg-gradient-to-br from-white/20 to-white/10 rounded-2xl shadow-2xl backdrop-blur-sm border border-white/20 overflow-hidden">
-                  <img 
-                    src="src/public/img/IMG_2446.jpg" 
+                <img 
+                    src="/img/IMG_2446.jpg" 
                     alt="Aakashe Profile" 
                     className="w-full h-full object-cover profile-image"
                     onError={(e) => {
@@ -329,7 +329,10 @@ const About = () => {
                       target.style.display = 'none';
                       const parent = target.parentElement;
                       if (parent) {
-                        parent.innerHTML = '<div class="w-full h-full flex items-center justify-center text-6xl">👨‍💻</div>';
+                        const fallbackDiv = document.createElement('div');
+                        fallbackDiv.className = "w-full h-full flex items-center justify-center text-6xl";
+                        fallbackDiv.textContent = "👨‍💻";
+                        parent.appendChild(fallbackDiv);
                       }
                     }}
                   />
