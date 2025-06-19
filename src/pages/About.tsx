@@ -31,47 +31,75 @@ const About = () => {
 
   const PHOTOGRAPHY_SITE = 'https://snapxdart.vercel.app';
   const SPOTIFY_PROFILE = 'https://open.spotify.com/user/31bn6ft24mjhrmghvkb6jjfttmwq';
-
-  // Function to fetch actual Spotify data from your API
-  async function fetchSpotifyData() {
-    try {
-      const response = await fetch('/api/spotify');
-      
-      if (!response.ok) {
-        throw new Error('Failed to fetch Spotify data');
-      }
-      
-      const tracks = await response.json();
-      
-      if (tracks && tracks.length > 0) {
-        // Get a random track from the top 5
-        const randomTrack = tracks[Math.floor(Math.random() * tracks.length)];
+    // Update the fetchSpotifyData function in About.tsx
+    async function fetchSpotifyData() {
+      try {
+        const response = await fetch('/api/spotify');
         
-        return {
-          artist: randomTrack.artists,
-          song: randomTrack.name,
-          image: randomTrack.image,
-          url: randomTrack.url
-        };
+        if (!response.ok) {
+          throw new Error('Failed to fetch Spotify data');
+        }
+        
+        const tracks = await response.json();
+        
+        if (tracks && tracks.length > 0) {
+          // Get a random track from the top 5
+          const randomTrack = tracks[Math.floor(Math.random() * tracks.length)];
+          
+          return {
+            artist: randomTrack.artists,
+            song: randomTrack.name,
+            image: randomTrack.image,
+            url: randomTrack.url
+          };
+        }
+        
+        throw new Error('No tracks found');
+      } catch (error) {
+        console.error('Error fetching Spotify data:', error);
+        
+        // Fallback to mock data if API fails
+        const mockData = [
+          { artist: "Tame Impala", song: "The Less I Know The Better" },
+          { artist: "Arctic Monkeys", song: "Do I Wanna Know?" },
+          { artist: "Mac Miller", song: "Good News" },
+          { artist: "The Weeknd", song: "Blinding Lights" },
+          { artist: "Tyler, The Creator", song: "EARFQUAKE" }
+        ];
+        
+        const randomData = mockData[Math.floor(Math.random() * mockData.length)];
+        return randomData;
       }
-      
-      throw new Error('No tracks found');
-    } catch (error) {
-      console.error('Error fetching Spotify data:', error);
-      
-      // Fallback to mock data if API fails
-      const mockData = [
-        { artist: "Tame Impala", song: "The Less I Know The Better" },
-        { artist: "Arctic Monkeys", song: "Do I Wanna Know?" },
-        { artist: "Mac Miller", song: "Good News" },
-        { artist: "The Weeknd", song: "Blinding Lights" },
-        { artist: "Tyler, The Creator", song: "EARFQUAKE" }
-      ];
-      
-      const randomData = mockData[Math.floor(Math.random() * mockData.length)];
-      return randomData;
     }
-  }
+
+    // Update the useEffect hook to handle refresh logic
+    useEffect(() => {
+      let isMounted = true;
+      
+      const fetchData = async () => {
+        try {
+          const data = await fetchSpotifyData();
+          if (isMounted) {
+            setSpotifyData(data);
+            setLoading(false);
+          }
+        } catch (error) {
+          console.error('Fetch failed:', error);
+          if (isMounted) setLoading(false);
+        }
+      };
+
+      // Initial fetch
+      fetchData();
+
+      // Set up refresh interval (every 5 minutes)
+      const interval = setInterval(fetchData, 5 * 60 * 1000);
+
+      return () => {
+        isMounted = false;
+        clearInterval(interval);
+      };
+    }, []);
 
   // Enhanced 3D Code Icon
   const Code3D = ({ className }: { className?: string }) => (
@@ -289,9 +317,9 @@ const About = () => {
                 Hi, I'm AAKASHE
               </h1>
               <p className="text-xl text-indigo-100 mb-8 leading-relaxed">
-                A passionate full-stack developer and technical writer based in Bengaluru. 
-                I love creating beautiful, functional web applications and sharing knowledge 
-                through writing and open-source contributions.
+                A curious coder and technical analyst based in Bengaluru. 
+                I love going beyond what can be done and thought about and sharing knowledge 
+                through writing and open-source contributions. Also it thrills me to get into neural networks methodology.
               </p>
               <div className="flex items-center text-indigo-200 mb-6">
                 <MapPin className="w-5 h-5 mr-2" />
